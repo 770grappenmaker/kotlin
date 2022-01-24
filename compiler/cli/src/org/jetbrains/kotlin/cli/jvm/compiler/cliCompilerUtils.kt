@@ -83,6 +83,9 @@ fun dumpModel(dir: String, chunk: List<Module>, configuration: CompilerConfigura
                 module.modularJdkRoot?.let {
                     addContent(Element("modularJdkRoot").setAttribute("path", module.modularJdkRoot))
                 }
+                attributes.add(
+                    Attribute("jdkHome", configuration.get(JVMConfigurationKeys.JDK_HOME)?.absolutePath)
+                )
             })
         }
     }
