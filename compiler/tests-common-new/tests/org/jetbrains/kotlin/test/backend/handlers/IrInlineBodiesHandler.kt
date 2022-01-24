@@ -37,6 +37,7 @@ class IrInlineBodiesHandler(testServices: TestServices) : AbstractIrHandler(test
         }
 
         override fun visitSimpleFunction(declaration: IrSimpleFunction) {
+            // TODO?!
             if (declaration.isInline) declaration.symbol.signature?.let { declaredInlineFunctionSignatures.add(it) }
             super.visitSimpleFunction(declaration)
         }
@@ -51,6 +52,7 @@ class IrInlineBodiesHandler(testServices: TestServices) : AbstractIrHandler(test
             val symbol = expression.symbol
             assertions.assertTrue(symbol.isBound)
             val callee = symbol.owner
+            // TODO?!
             if (callee.symbol.signature in declaredInlineFunctionSignatures) {
                 val trueCallee = (callee as IrSimpleFunction).resolveFakeOverride()!!
                 assertions.assertNotNull(trueCallee.body)

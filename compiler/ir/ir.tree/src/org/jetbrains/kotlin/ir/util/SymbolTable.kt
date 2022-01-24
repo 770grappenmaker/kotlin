@@ -13,6 +13,7 @@ import org.jetbrains.kotlin.ir.declarations.impl.IrExternalPackageFragmentImpl
 import org.jetbrains.kotlin.ir.declarations.impl.IrScriptImpl
 import org.jetbrains.kotlin.ir.declarations.impl.IrVariableImpl
 import org.jetbrains.kotlin.ir.declarations.lazy.IrLazySymbolTable
+import org.jetbrains.kotlin.ir.descriptors.IrBasedClassDescriptor
 import org.jetbrains.kotlin.ir.expressions.IrExpression
 import org.jetbrains.kotlin.ir.expressions.IrExpressionBody
 import org.jetbrains.kotlin.ir.symbols.*
@@ -473,7 +474,9 @@ open class SymbolTable(
     }
 
     override fun referenceClass(descriptor: ClassDescriptor): IrClassSymbol =
-        classSymbolTable.referenced(descriptor) { signature -> createClassSymbol(descriptor, signature) }
+        // TODO: find out if there's a better solution.
+        if (descriptor is IrBasedClassDescriptor) descriptor.owner.symbol
+        else classSymbolTable.referenced(descriptor) { signature -> createClassSymbol(descriptor, signature) }
 
     fun referenceClass(
         sig: IdSignature,
