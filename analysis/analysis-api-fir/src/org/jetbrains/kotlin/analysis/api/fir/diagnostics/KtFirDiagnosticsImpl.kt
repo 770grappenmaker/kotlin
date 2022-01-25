@@ -3689,3 +3689,13 @@ internal class JavaSamInterfaceConstructorReferenceImpl(
     override val token: ValidityToken,
 ) : KtFirDiagnostic.JavaSamInterfaceConstructorReference(), KtAbstractFirDiagnostic<PsiElement>
 
+internal class EnumDeclaringClassDeprecatedErrorImpl(
+    override val firDiagnostic: KtPsiDiagnostic,
+    override val token: ValidityToken,
+) : KtFirDiagnostic.EnumDeclaringClassDeprecatedError(), KtAbstractFirDiagnostic<PsiElement>
+
+internal class EnumDeclaringClassDeprecatedWarningImpl(
+    override val firDiagnostic: KtPsiDiagnostic,
+    override val token: ValidityToken,
+) : KtFirDiagnostic.EnumDeclaringClassDeprecatedWarning(), KtAbstractFirDiagnostic<PsiElement>
+

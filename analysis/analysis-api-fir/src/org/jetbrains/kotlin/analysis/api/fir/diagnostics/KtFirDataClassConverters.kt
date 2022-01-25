@@ -4384,4 +4384,16 @@ internal val KT_DIAGNOSTIC_CONVERTER = KtDiagnosticConverterBuilder.buildConvert
             token,
         )
     }
+    add(FirJvmErrors.ENUM_DECLARING_CLASS_DEPRECATED.errorFactory) { firDiagnostic ->
+        EnumDeclaringClassDeprecatedErrorImpl(
+            firDiagnostic as KtPsiDiagnostic,
+            token,
+        )
+    }
+    add(FirJvmErrors.ENUM_DECLARING_CLASS_DEPRECATED.warningFactory) { firDiagnostic ->
+        EnumDeclaringClassDeprecatedWarningImpl(
+            firDiagnostic as KtPsiDiagnostic,
+            token,
+        )
+    }
 }

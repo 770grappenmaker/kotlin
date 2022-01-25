@@ -8,6 +8,7 @@ package org.jetbrains.kotlin.fir.analysis.diagnostics.jvm
 import com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.config.LanguageFeature.DefaultMethodsCallFromJava6TargetError
 import org.jetbrains.kotlin.config.LanguageFeature.ProhibitConcurrentHashMapContains
+import org.jetbrains.kotlin.config.LanguageFeature.ProhibitEnumDeclaringClass
 import org.jetbrains.kotlin.config.LanguageFeature.ProhibitJvmOverloadsOnConstructorsOfAnnotationClasses
 import org.jetbrains.kotlin.config.LanguageFeature.ProhibitSpreadOnSignaturePolymorphicCall
 import org.jetbrains.kotlin.config.LanguageFeature.RepeatableAnnotationContainerConstraints
@@ -126,6 +127,7 @@ object FirJvmErrors {
     val CONCURRENT_HASH_MAP_CONTAINS_OPERATOR by deprecationError0<PsiElement>(ProhibitConcurrentHashMapContains)
     val SPREAD_ON_SIGNATURE_POLYMORPHIC_CALL by deprecationError0<PsiElement>(ProhibitSpreadOnSignaturePolymorphicCall, SourceElementPositioningStrategies.SPREAD_OPERATOR)
     val JAVA_SAM_INTERFACE_CONSTRUCTOR_REFERENCE by error0<PsiElement>()
+    val ENUM_DECLARING_CLASS_DEPRECATED by deprecationError0<PsiElement>(ProhibitEnumDeclaringClass, SourceElementPositioningStrategies.REFERENCED_NAME_BY_QUALIFIED)
 
     init {
         RootDiagnosticRendererFactory.registerFactory(FirJvmErrorsDefaultMessages)

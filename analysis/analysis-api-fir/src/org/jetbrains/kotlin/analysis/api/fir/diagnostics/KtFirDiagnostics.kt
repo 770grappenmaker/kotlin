@@ -3051,4 +3051,12 @@ sealed class KtFirDiagnostic<PSI : PsiElement> : KtDiagnosticWithPsi<PSI> {
         override val diagnosticClass get() = JavaSamInterfaceConstructorReference::class
     }
 
+    abstract class EnumDeclaringClassDeprecatedError : KtFirDiagnostic<PsiElement>() {
+        override val diagnosticClass get() = EnumDeclaringClassDeprecatedError::class
+    }
+
+    abstract class EnumDeclaringClassDeprecatedWarning : KtFirDiagnostic<PsiElement>() {
+        override val diagnosticClass get() = EnumDeclaringClassDeprecatedWarning::class
+    }
+
 }

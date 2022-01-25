@@ -11,13 +11,14 @@ import org.jetbrains.kotlin.fir.analysis.jvm.checkers.expression.*
 object JvmExpressionCheckers : ExpressionCheckers() {
     override val qualifiedAccessCheckers: Set<FirQualifiedAccessChecker>
         get() = setOf(
-            FirJvmProtectedInSuperClassCompanionCallChecker
+            FirJvmProtectedInSuperClassCompanionCallChecker,
+            FirEnumDeclaringClassDeprecationChecker,
         )
 
     override val qualifiedAccessExpressionCheckers: Set<FirQualifiedAccessExpressionChecker>
         get() = setOf(
             FirInterfaceDefaultMethodCallChecker,
-            FirJavaSamInterfaceConstructorReferenceChecker
+            FirJavaSamInterfaceConstructorReferenceChecker,
         )
 
     override val functionCallCheckers: Set<FirFunctionCallChecker>
@@ -26,7 +27,7 @@ object JvmExpressionCheckers : ExpressionCheckers() {
             FirSuperCallWithDefaultsChecker,
             FirJvmSuspensionPointInsideMutexLockChecker,
             FirJvmInconsistentOperatorFromJavaCallChecker,
-            FirJvmPolymorphicSignatureCallChecker
+            FirJvmPolymorphicSignatureCallChecker,
         )
 
     override val annotationCheckers: Set<FirAnnotationChecker>
