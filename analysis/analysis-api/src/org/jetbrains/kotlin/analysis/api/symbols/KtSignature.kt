@@ -6,10 +6,17 @@
 package org.jetbrains.kotlin.analysis.api.symbols
 
 import org.jetbrains.kotlin.analysis.api.ValidityTokenOwner
+import org.jetbrains.kotlin.analysis.api.annotations.KtConstantAnnotationValue
+import org.jetbrains.kotlin.analysis.api.annotations.annotations
+import org.jetbrains.kotlin.analysis.api.annotations.annotationsByClassId
 import org.jetbrains.kotlin.analysis.api.tokens.ValidityToken
 import org.jetbrains.kotlin.analysis.api.types.KtSubstitutor
 import org.jetbrains.kotlin.analysis.api.types.KtType
 import org.jetbrains.kotlin.analysis.api.withValidityAssertion
+import org.jetbrains.kotlin.builtins.StandardNames
+import org.jetbrains.kotlin.name.Name
+import org.jetbrains.kotlin.name.StandardClassIds
+import org.jetbrains.kotlin.utils.addToStdlib.runIf
 
 /**
  * A signature for a callable symbol. Comparing to a `KtCallableSymbol`, a signature can carry use-site type information. For example
@@ -83,6 +90,45 @@ public data class KtVariableLikeSignature<out S : KtVariableLikeSymbol>(
         get() = withValidityAssertion { _returnType }
     override val receiverType: KtType?
         get() = withValidityAssertion { _receiverType }
+
+    /**
+     * Some variables can have their names changed by special annotations like `@ParameterName(name = "newName")`. This is used to preserve
+     * the names of the lambda parameters in the situations like this:
+     *
+     * ```
+     * // compiled library
+     * fun foo(): (bar: String) -> Unit { ... }
+     *
+     * // source code
+     * fun test() {
+     *   val action = foo()
+     *   action("") // this call
+     * }
+     * ```
+     *
+     * Unfortunately, [symbol] for the `action("")` call will be pointing to the `Function1<P0, R>.invoke(p0: P0): R`, because we
+     * intentionally unwrap use-site substitution overrides. Because of this, `symbol.name` will yield `"p0"`, and not `"bar"`.
+     *
+     * To overcome this problem, [name] property is introduced: it allows to get the intended name of the parameter,
+     * with respect to `@ParameterName` annotation.
+     *
+     * @see org.jetbrains.kotlin.analysis.api.fir.KtSymbolByFirBuilder.unwrapUseSiteSubstitutionOverride
+     */
+    val name: Name
+        get() = withValidityAssertion {
+            runIf(_symbol.psi == null) { getValueFromParameterNameAnnotation() } ?: _symbol.name
+        }
+
+    private fun getValueFromParameterNameAnnotation(): Name? {
+        val parameterNameAnnotation =
+            returnType.annotationsByClassId(StandardNames.FqNames.parameterNameClassId).singleOrNull() ?: return null
+        val parameterNameArgument = parameterNameAnnotation.arguments
+            .singleOrNull { it.name == StandardClassIds.Annotations.ParameterNames.parameterNameName }
+
+        val constantArgumentValue = parameterNameArgument?.expression as? KtConstantAnnotationValue ?: return null
+
+        return (constantArgumentValue.constantValue.value as? String)?.let(Name::identifier)
+    }
 }
 
 public fun <S : KtCallableSymbol> S.toSignature(substitutor: KtSubstitutor = KtSubstitutor.Empty(token)): KtSignature<S> {
