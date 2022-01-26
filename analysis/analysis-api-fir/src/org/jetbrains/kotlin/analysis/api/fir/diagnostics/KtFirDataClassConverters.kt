@@ -1040,18 +1040,6 @@ internal val KT_DIAGNOSTIC_CONVERTER = KtDiagnosticConverterBuilder.buildConvert
             token,
         )
     }
-    add(FirErrors.OPT_IN_MARKER_ON_OVERRIDE) { firDiagnostic ->
-        OptInMarkerOnOverrideImpl(
-            firDiagnostic as KtPsiDiagnostic,
-            token,
-        )
-    }
-    add(FirErrors.OPT_IN_MARKER_ON_OVERRIDE_WARNING) { firDiagnostic ->
-        OptInMarkerOnOverrideWarningImpl(
-            firDiagnostic as KtPsiDiagnostic,
-            token,
-        )
-    }
     add(FirErrors.EXPOSED_TYPEALIAS_EXPANDED_TYPE) { firDiagnostic ->
         ExposedTypealiasExpandedTypeImpl(
             firDiagnostic.a,

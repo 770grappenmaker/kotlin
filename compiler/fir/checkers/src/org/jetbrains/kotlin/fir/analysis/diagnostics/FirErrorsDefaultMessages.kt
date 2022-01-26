@@ -361,8 +361,6 @@ import org.jetbrains.kotlin.fir.analysis.diagnostics.FirErrors.OPT_IN_ARGUMENT_I
 import org.jetbrains.kotlin.fir.analysis.diagnostics.FirErrors.OPT_IN_CAN_ONLY_BE_USED_AS_ANNOTATION
 import org.jetbrains.kotlin.fir.analysis.diagnostics.FirErrors.OPT_IN_IS_NOT_ENABLED
 import org.jetbrains.kotlin.fir.analysis.diagnostics.FirErrors.OPT_IN_MARKER_CAN_ONLY_BE_USED_AS_ANNOTATION_OR_ARGUMENT_IN_OPT_IN
-import org.jetbrains.kotlin.fir.analysis.diagnostics.FirErrors.OPT_IN_MARKER_ON_OVERRIDE
-import org.jetbrains.kotlin.fir.analysis.diagnostics.FirErrors.OPT_IN_MARKER_ON_OVERRIDE_WARNING
 import org.jetbrains.kotlin.fir.analysis.diagnostics.FirErrors.OPT_IN_MARKER_ON_WRONG_TARGET
 import org.jetbrains.kotlin.fir.analysis.diagnostics.FirErrors.OPT_IN_MARKER_WITH_WRONG_RETENTION
 import org.jetbrains.kotlin.fir.analysis.diagnostics.FirErrors.OPT_IN_MARKER_WITH_WRONG_TARGET
@@ -846,14 +844,6 @@ object FirErrorsDefaultMessages : BaseDiagnosticRendererFactory() {
             "Opt-in requirement marker annotation cannot be used with SOURCE retention. Please replace retention with BINARY"
         )
         map.put(OPT_IN_MARKER_ON_WRONG_TARGET, "Opt-in requirement marker annotation cannot be used on {0}", STRING)
-        map.put(
-            OPT_IN_MARKER_ON_OVERRIDE,
-            "Opt-in requirement marker annotation on override requires the same marker on base declaration"
-        )
-        map.put(
-            OPT_IN_MARKER_ON_OVERRIDE_WARNING,
-            "Opt-in requirement marker annotation on override makes no sense without the same marker on base declaration"
-        )
         map.put(NOT_A_CLASS, "Not a class")
         map.put(
             WRONG_EXTENSION_FUNCTION_TYPE,

@@ -333,8 +333,6 @@ public interface Errors {
     DiagnosticFactory0<PsiElement> OPT_IN_MARKER_WITH_WRONG_RETENTION = DiagnosticFactory0.create(ERROR);
 
     DiagnosticFactory1<KtAnnotationEntry, String> OPT_IN_MARKER_ON_WRONG_TARGET = DiagnosticFactory1.create(ERROR);
-    DiagnosticFactory0<KtAnnotationEntry> OPT_IN_MARKER_ON_OVERRIDE = DiagnosticFactory0.create(ERROR);
-    DiagnosticFactory0<KtAnnotationEntry> OPT_IN_MARKER_ON_OVERRIDE_WARNING = DiagnosticFactory0.create(WARNING);
 
     DiagnosticFactory1<PsiElement, String> EXPERIMENTAL_UNSIGNED_LITERALS = DiagnosticFactory1.create(WARNING);
     DiagnosticFactory1<PsiElement, String> EXPERIMENTAL_UNSIGNED_LITERALS_ERROR = DiagnosticFactory1.create(ERROR);
