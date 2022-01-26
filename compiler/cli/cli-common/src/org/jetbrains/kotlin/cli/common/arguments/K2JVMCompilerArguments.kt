@@ -55,12 +55,12 @@ class K2JVMCompilerArguments : CommonCompilerArguments() {
         value = "-no-stdlib",
         description = "Don't automatically include the Kotlin/JVM stdlib and Kotlin reflection into the classpath"
     )
-    var noStdlib: Boolean by FreezableVar(false)
+    var noStdlib: Boolean by FreezableVar(true)
 
     @DeprecatedOption(removeAfter = "1.5", level = DeprecationLevel.ERROR)
     @GradleOption(DefaultValues.BooleanTrueDefault::class)
     @Argument(value = "-no-reflect", description = "Don't automatically include Kotlin reflection into the classpath")
-    var noReflect: Boolean by FreezableVar(false)
+    var noReflect: Boolean by FreezableVar(true)
 
     @Argument(
         value = "-expression",
