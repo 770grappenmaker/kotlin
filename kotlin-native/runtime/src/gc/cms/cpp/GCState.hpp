@@ -12,7 +12,7 @@
 
 class GCStateHolder {
 public:
-    int64_t schedule() {
+    ALWAYS_INLINE int64_t schedule() {
         std::unique_lock lock(mutex_);
         if (*scheduledEpoch <= *startedEpoch) {
             scheduledEpoch.set(lock, *startedEpoch + 1);
