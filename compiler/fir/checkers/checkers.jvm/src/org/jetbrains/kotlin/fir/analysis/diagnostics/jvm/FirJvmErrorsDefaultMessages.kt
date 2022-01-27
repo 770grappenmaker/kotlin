@@ -17,7 +17,6 @@ import org.jetbrains.kotlin.fir.analysis.diagnostics.jvm.FirJvmErrors.CONFLICTIN
 import org.jetbrains.kotlin.fir.analysis.diagnostics.jvm.FirJvmErrors.DEFAULT_METHOD_CALL_FROM_JAVA6_TARGET
 import org.jetbrains.kotlin.fir.analysis.diagnostics.jvm.FirJvmErrors.DELEGATION_BY_IN_JVM_RECORD
 import org.jetbrains.kotlin.fir.analysis.diagnostics.jvm.FirJvmErrors.DEPRECATED_JAVA_ANNOTATION
-import org.jetbrains.kotlin.fir.analysis.diagnostics.jvm.FirJvmErrors.ENUM_DECLARING_CLASS_DEPRECATED
 import org.jetbrains.kotlin.fir.analysis.diagnostics.jvm.FirJvmErrors.ENUM_JVM_RECORD
 import org.jetbrains.kotlin.fir.analysis.diagnostics.jvm.FirJvmErrors.EXTERNAL_DECLARATION_CANNOT_BE_ABSTRACT
 import org.jetbrains.kotlin.fir.analysis.diagnostics.jvm.FirJvmErrors.EXTERNAL_DECLARATION_CANNOT_BE_INLINED
@@ -284,7 +283,6 @@ object FirJvmErrorsDefaultMessages : BaseDiagnosticRendererFactory() {
             JAVA_SAM_INTERFACE_CONSTRUCTOR_REFERENCE,
             "Java SAM interface constructor references are prohibited"
         )
-        map.put(ENUM_DECLARING_CLASS_DEPRECATED, "Enum.declaringClass is deprecated, use javaDeclaringClass instead")
 
         map.checkMissingMessages(FirJvmErrors)
     }

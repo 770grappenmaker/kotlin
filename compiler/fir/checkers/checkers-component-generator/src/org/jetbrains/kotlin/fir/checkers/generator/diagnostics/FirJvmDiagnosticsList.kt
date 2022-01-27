@@ -6,7 +6,6 @@
 package org.jetbrains.kotlin.fir.checkers.generator.diagnostics
 
 import com.intellij.psi.PsiElement
-import org.jetbrains.kotlin.config.LanguageFeature
 import org.jetbrains.kotlin.config.LanguageFeature.*
 import org.jetbrains.kotlin.fir.PrivateForInline
 import org.jetbrains.kotlin.fir.checkers.generator.diagnostics.model.DiagnosticList
@@ -185,8 +184,5 @@ object JVM_DIAGNOSTICS_LIST : DiagnosticList("FirJvmErrors") {
             PositioningStrategy.SPREAD_OPERATOR
         )
         val JAVA_SAM_INTERFACE_CONSTRUCTOR_REFERENCE by error<PsiElement>()
-        val ENUM_DECLARING_CLASS_DEPRECATED by deprecationError<PsiElement>(
-            ProhibitEnumDeclaringClass, PositioningStrategy.REFERENCED_NAME_BY_QUALIFIED
-        )
     }
 }
